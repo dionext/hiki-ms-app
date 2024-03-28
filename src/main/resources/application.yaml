@@ -1,0 +1,148 @@
+management:
+  endpoints:
+    web:
+      base-path: /api/actuator/
+
+# Application info
+info:
+  name: 'hiking'
+  description: 'Hiking Land main site'
+  version: '@project.version@'
+  time: '@maven.build.timestamp@'
+  app:
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      source: '@java.version@'
+      target: '@java.version@'
+
+service:
+  shutdown:
+    graceful
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: "30s"
+  thymeleaf:
+    check-template-location: false # to prevent warning
+  #database
+  datasource:
+    username: ${MYSQL_USER:}
+    password: ${MYSQL_PASSWORD:}
+    continue-on-error: true # not working
+  jpa:
+    open-in-view: false #to prevent warning
+    show-sql: true
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari: OFF # suppress errors in log when DatabaseStartupValidator trying to connect to database
+
+#----------------------------------------
+web-config:
+  website:
+    siteProtocol: "https"
+  multiSites:
+    hiking:
+      siteLangs: "en,ru"
+      siteLangInPath: true
+      siteDomain: "hiking.land"
+      siteProtocol: "https"
+      siteStaticStoragePath: "file:/mnt/sites/hiking/output"
+      siteStoragePaths:
+        - "file:/mnt/sites/hiking/input"
+        - "file:/mnt/sites/hiking/output"
+      siteInternalStoragePaths:
+        - "file:/mnt/sites/hiking/mediainfo"
+      createMetaOg: true
+      pageFaceImage: "images/hiking_land_1200_630.jpg"
+      createMetaForIcons: true
+      staticPrefixes:
+        - "images"
+        - "images_p"
+      useExternalUrlForImages: false
+      mediaGallery:
+        useExternalUrlForImages: false
+      places:
+        useExternalUrlForImages: true
+      keywords:
+        key: "site.keywords"
+      description:
+        key: "site.description"
+      siteTitle:
+        key: "site.title"
+      googleTagID: "G-L7K0706J99"
+      nav:
+        - item:
+          key: "menu.home"
+          url: "index.htm"
+        - item:
+          key: "menu.hiking"
+          url: "hiking.htm"
+        - item:
+          key: "menu.theory"
+          url: "#"
+          subitems:
+            - item:
+              key: "menu.hiking"
+              url: "hiking.htm"
+            - item:
+              key: "menu.terms"
+              url: "terms.htm"
+            - item:
+              key: "menu.rules"
+              url: "rules.htm"
+            - item:
+              key: "menu.alpenverein"
+              url: "alpenverein.htm"
+            - item:
+              key: "menu.image_gallery"
+              url: "gallery/gallery.htm"
+            - item:
+              key: "menu.videochannel"
+              url: "videochannel.htm"
+            - item:
+              key: "menu.movies.about.tourism"
+              url: "media/list"
+            - item:
+              key: "menu.similar"
+              url: "around.htm"
+        - item:
+          key: "menu.practics"
+          url: "#"
+          subitems:
+            - item:
+              key: "menu.maps"
+              url: "maps.htm"
+            - item:
+              key: "menu.favorite.places"
+              url: "favorite.htm"
+            - item:
+              key: "menu.regions.wiki"
+              url: "places/list"
+            - item:
+              key: "menu.trafic"
+              url: "trafic.htm"
+            - item:
+              key: "menu.booking"
+              url: "booking.htm"
+            - item:
+              key: "menu.equipment"
+              url: "equipment.htm"
+        - item:
+          key: "menu.other"
+          url: "#"
+          subitems:
+            - item:
+              key: "menu.about.project"
+              url: "about.htm"
+            - item:
+              key: "menu.links"
+              url: "links.htm"
+
+
