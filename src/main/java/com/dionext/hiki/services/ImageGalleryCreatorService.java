@@ -52,7 +52,7 @@ public class ImageGalleryCreatorService extends HikingLandPageCreatorService {
                 body.append("""
                         <a data-toggle="lightbox" data-gallery="gallery" class="col-md-4" """); //data-gallery="mixedgallery"  data-gallery="example-gallery" - For grouping elements
                 body.append("href=\"");
-                body.append(pageInfo.getOffsetStringToLangLevel());
+                body.append(pageInfo.getOffsetStringToContextLevel());
                 body.append(item.getFullSizePath());
                 body.append("\"");
                 if (item.getTitle() != null) {
@@ -66,7 +66,7 @@ public class ImageGalleryCreatorService extends HikingLandPageCreatorService {
             }
             body.append("""
                     <img class="img-fluid rounded" src=\"""");
-            body.append(pageInfo.getOffsetStringToLangLevel());
+            body.append(pageInfo.getOffsetStringToContextLevel());
             body.append(item.getTumbPath());
             body.append("\"");
             if (item.getTitle() != null) {
