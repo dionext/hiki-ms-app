@@ -1,11 +1,8 @@
 package com.dionext.hiki.controllers;
 
-import com.dionext.hiki.services.HikingLandPageCreatorService;
-import com.dionext.hiki.services.ImageGalleryCreatorService;
-import com.dionext.hiki.services.MediaGalleryCreatorService;
-import com.dionext.hiki.services.PlaceCreatorService;
+import com.dionext.hiki.services.*;
 import com.dionext.site.controllers.BaseSiteController;
-import com.dionext.site.services.PageParserService;
+import com.dionext.utils.exceptions.DioRuntimeException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +24,10 @@ public class HikingLandSiteController extends BaseSiteController {
     PlaceCreatorService placeCreatorService;
     HikingLandPageCreatorService hikingLandPageElementService;
 
-    private PageParserService pageParserService;
+    private HikingLandPageParserService hikingLandPageParserService;
     @Autowired
-    public void setPageParserService(PageParserService pageParserService) {
-        this.pageParserService = pageParserService;
+    public void setHikingLandPageParserService(HikingLandPageParserService hikingLandPageParserService) {
+        this.hikingLandPageParserService = hikingLandPageParserService;
     }
 
     @Autowired
@@ -56,7 +53,7 @@ public class HikingLandSiteController extends BaseSiteController {
     @GetMapping(value = {"/**"}, produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> processPage() {
         return sendOk(
-                createSimpleSitePage(pageParserService, hikingLandPageElementService));
+                createSimpleSitePage(hikingLandPageParserService, hikingLandPageElementService));
     }
 
     @GetMapping(value = {"/gallery/**"}, produces = MediaType.TEXT_HTML_VALUE)
@@ -67,13 +64,17 @@ public class HikingLandSiteController extends BaseSiteController {
     @GetMapping(value = {"/media/**"}, produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> processMediaGallery() {
         return sendOk(mediaGalleryCreatorService.createMediaGalleryPage(
-                pageParserService.getSimpleSitePageSource("_movies.htm")));
+                hikingLandPageParserService.getSimpleSitePageSource("_movies.htm")));
     }
 
     @GetMapping(value = {"/places/**"}, produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> processPlaces() {
         return sendOk(placeCreatorService.createPlacesPage(
-                pageParserService.getSimpleSitePageSource("_places.htm")));
+                hikingLandPageParserService.getSimpleSitePageSource("_places.htm")));
+    }
+    @GetMapping(value = {"/testerror"}, produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> processError() {
+        throw new DioRuntimeException("Test error");
     }
 
 

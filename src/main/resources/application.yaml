@@ -105,9 +105,9 @@ web-config:
             - item:
               key: "menu.image_gallery"
               url: "gallery/gallery.htm"
-            - item:
-              key: "menu.videochannel"
-              url: "videochannel.htm"
+            #- item:
+            #  key: "menu.videochannel"
+            #  url: "videochannel.htm"
             - item:
               key: "menu.movies.about.tourism"
               url: "media/list"
