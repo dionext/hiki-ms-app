@@ -20,67 +20,52 @@ public class JMedia implements Serializable {
     @Id
     private Integer JMediaId;
 
-    @Lob
-    @Column(name = "BackdropPath")
+    @Column(name = "BackdropPath", columnDefinition="TEXT")
     private String backdropPath;
 
     @Column(name = "Budget")
     private BigInteger budget;
 
-    @Lob
-    @Column(name = "CastEn")
+    @Column(name = "CastEn", columnDefinition="TEXT")
     private String castEn;
 
-    @Lob
-    @Column(name = "CastRu")
+    @Column(name = "CastRu", columnDefinition="TEXT")
     private String castRu;
 
-    @Lob
-    @Column(name = "DescriptionEn")
+    @Column(name = "DescriptionEn", columnDefinition="TEXT")
     private String descriptionEn;
 
-    @Lob
-    @Column(name = "DescriptionRu")
+    @Column(name = "DescriptionRu", columnDefinition="TEXT")
     private String descriptionRu;
 
-    @Lob
-    @Column(name = "DirectorEn")
+    @Column(name = "DirectorEn", columnDefinition="TEXT")
     private String directorEn;
 
-    @Lob
-    @Column(name = "DirectorRu")
+    @Column(name = "DirectorRu", columnDefinition="TEXT")
     private String directorRu;
 
-    @Lob
-    @Column(name = "GenresEn")
+    @Column(name = "GenresEn", columnDefinition="TEXT")
     private String genresEn;
 
-    @Lob
-    @Column(name = "GenresRu")
+    @Column(name = "GenresRu", columnDefinition="TEXT")
     private String genresRu;
 
-    @Lob
     @Column(name = "ImdbId")
     private String imdbId;
 
-    @Lob
-    @Column(name = "LabelEn")
+    @Column(name = "LabelEn", columnDefinition="TEXT")
     private String labelEn;
 
-    @Lob
-    @Column(name = "LabelRu")
+    @Column(name = "LabelRu", columnDefinition="TEXT")
     private String labelRu;
 
-    @Lob
-    @Column(name = "OverviewEn")
+    @Column(name = "OverviewEn", columnDefinition="TEXT")
     private String overviewEn;
 
-    @Lob
-    @Column(name = "OverviewRu")
+    @Column(name = "OverviewRu", columnDefinition="TEXT")
     private String overviewRu;
 
-    @Lob
-    @Column(name = "PosterPath")
+    @Column(name = "PosterPath", columnDefinition="TEXT")
     private String posterPath;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -90,22 +75,18 @@ public class JMedia implements Serializable {
     @Column(name = "Runtime")
     private Integer runtime;
 
-    @Lob
-    @Column(name = "SafeName")
+    @Column(name = "SafeName", columnDefinition="TEXT")
     private String safeName;
 
     @Column(name = "SortOrder")
     private Integer sortOrder;
 
-    @Lob
-    @Column(name = "TaglineEn")
+    @Column(name = "TaglineEn", columnDefinition="TEXT")
     private String taglineEn;
 
-    @Lob
-    @Column(name = "TaglineRu")
+    @Column(name = "TaglineRu", columnDefinition="TEXT")
     private String taglineRu;
 
-    @Lob
     private String TMDbId;
 
     public int getJMediaId() {

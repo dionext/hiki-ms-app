@@ -1,5 +1,6 @@
 package com.dionext.hiki.components;
 
+import com.dionext.hiki.db.entity.JGeoWikidata;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -16,5 +17,6 @@ public class GeoPageInfo {
     private String lon;
     private String placename;
     private String region;
+    private JGeoWikidata item;
 
 }

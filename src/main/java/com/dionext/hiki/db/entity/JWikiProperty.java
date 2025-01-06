@@ -24,73 +24,59 @@ public class JWikiProperty implements Serializable {
     private int count;
 
     @JsonProperty("DescriptionEn")
-    @Lob
-    @Column(name = "DescriptionEn")
+    @Column(name = "DescriptionEn", columnDefinition="TEXT")
     private String descriptionEn;
 
     @JsonProperty("DescriptionNative")
-    @Lob
-    @Column(name = "DescriptionNative")
+    @Column(name = "DescriptionNative", columnDefinition="TEXT")
     private String descriptionNative;
 
     @JsonProperty("DescriptionRu")
-    @Lob
-    @Column(name = "DescriptionRu")
+    @Column(name = "DescriptionRu", columnDefinition="TEXT")
     private String descriptionRu;
 
     @JsonProperty("ExampleValue")
-    @Lob
-    @Column(name = "ExampleValue")
+    @Column(name = "ExampleValue", columnDefinition="TEXT")
     private String exampleValue;
 
     @JsonProperty("ExampleValue1")
-    @Lob
-    @Column(name = "ExampleValue1")
+    @Column(name = "ExampleValue1", columnDefinition="TEXT")
     private String exampleValue1;
 
     @JsonProperty("FormatterRegExp")
-    @Lob
-    @Column(name = "FormatterRegExp")
+    @Column(name = "FormatterRegExp", columnDefinition="TEXT")
     private String formatterRegExp;
 
     @JsonProperty("FormatterURL")
-    @Lob
-    @Column(name = "FormatterURL")
+    @Column(name = "FormatterURL", columnDefinition="TEXT")
     private String formatterURL;
 
     @JsonProperty("FormatterURLAlt")
-    @Lob
-    @Column(name = "FormatterURLAlt")
+    @Column(name = "FormatterURLAlt", columnDefinition="TEXT")
     private String formatterURLAlt;
 
     @JsonProperty("LabelEn")
-    @Lob
-    @Column(name = "LabelEn")
+    @Column(name = "LabelEn", columnDefinition="TEXT")
     private String labelEn;
 
     @JsonProperty("LabelNative")
-    @Lob
-    @Column(name = "LabelNative")
+    @Column(name = "LabelNative", columnDefinition="TEXT")
     private String labelNative;
 
     @JsonProperty("LabelRu")
-    @Lob
-    @Column(name = "LabelRu")
+    @Column(name = "LabelRu", columnDefinition="TEXT")
     private String labelRu;
 
     @JsonProperty("ResultTestUrl")
-    @Lob
-    @Column(name = "ResultTestUrl")
+    @Column(name = "ResultTestUrl", columnDefinition="TEXT")
     private String resultTestUrl;
 
     @JsonProperty("ResultTestUrlAlt")
-    @Lob
-    @Column(name = "ResultTestUrlAlt")
+    @Column(name = "ResultTestUrlAlt", columnDefinition="TEXT")
     private String resultTestUrlAlt;
 
     @JsonProperty("WebSite")
-    @Lob
-    @Column(name = "WebSite")
+    @Column(name = "WebSite", columnDefinition="TEXT")
     private String webSite;
 
 

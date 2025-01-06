@@ -17,5 +17,12 @@ public class JWikiPropertyValue {
         return value;
     }
 
+    public void setProp(String prop) {
+        this.prop = prop;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }
 

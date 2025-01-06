@@ -59,6 +59,7 @@ public class MediaGalleryCreatorService extends HikingLandPageCreatorService {
             //movie page
             body.append(generateMediaBlock(item, true));
         } else {
+            pageInfo.addPageTitle(i18n.getString("media.list.of.movies.about.tourism", pageInfo.getLocale()));
             List<JMedia> list = jMediaRepository.findAll();
 
             if (!list.isEmpty()) {
@@ -87,12 +88,12 @@ public class MediaGalleryCreatorService extends HikingLandPageCreatorService {
             }
         }
 
-        return createHtmlAll(new SrcPageContent(body.toString(), i18n.getString("imagegallery.image.gallery", pageInfo.getLocale())));
+        return createHtmlAll(new SrcPageContent(body.toString()));
 
     }
 
     private String generateMediaBlock(JMedia item, boolean singlePage) {
-        boolean ru = pageInfo.getRu();
+        boolean ru = getRu();
         StringBuilder str = new StringBuilder();
 
         String posterImageStr = null;
@@ -103,8 +104,9 @@ public class MediaGalleryCreatorService extends HikingLandPageCreatorService {
             backdropImageStr = getImageUrlForMedia(item.getBackdropPath(), singlePage ? BACKDROP_IMAGE_W_FOR_SINGLE_PAGE : BACKDROP_IMAGE_W_FOR_CARD);
         if (singlePage) {
             if (pageInfo != null) {
-                pageInfo.setKeywords(i18n.getString("media.movie", pageInfo.getLocale()));
-                pageInfo.setDescription(i18n.getString("media.movie", pageInfo.getLocale()) + item.GetName(ru) + "." + (pageInfo.getDescription() != null ? " " + pageInfo.getDescription() : ""));
+                pageInfo.addPageTitle(item.GetName(ru));
+                pageInfo.addKeywords(item.GetName(ru));
+                pageInfo.addDescription(i18n.getString("media.movie", pageInfo.getLocale()) + item.GetName(ru) + "." + (pageInfo.getDescription() != null ? " " + pageInfo.getDescription() : ""));
                 pageInfo.setPageImage(posterImageStr);
             }
             str.append("<h1>");

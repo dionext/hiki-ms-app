@@ -16,15 +16,22 @@ info:
       target: '@java.version@'
 server:
   port: 8080
-service:
   shutdown:
-    graceful
+    graceful # see also spring.lifecycle.timeout-per-shutdown-phase=1m
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: "off"
+    log-startup-info: true
   lifecycle:
     timeout-per-shutdown-phase: "30s"
   thymeleaf:
     check-template-location: false # to prevent warning
-  #database
+  security:
+    user:
+      name: ${ADMIN_USER:admin}
+      password: ${ADMIN_PASSWORD:admin}
+#database
   datasource:
     url: jdbc:mariadb://${DATABASE_ADDRESS}?useSSL=false&allowMultiQueries=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
     username: ${MYSQL_USER:}
@@ -37,8 +44,14 @@ spring:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      #for auto update database (! use carefully)
+      ddl-auto: update
     properties:
       hibernate:
+  # for database migrations
+  flyway:
+    baseline-on-migrate: true
+    #baseline-version: '0'
 logging:
   level:
     com:
@@ -125,7 +138,7 @@ web-config:
               key: "menu.favorite.places"
               url: "favorite.htm"
             - item:
-              key: "menu.regions.wiki"
+              key: "menu.alpine.countries"
               url: "places/list"
             - item:
               key: "menu.trafic"

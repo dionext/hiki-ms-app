@@ -1,11 +1,17 @@
 package com.dionext.hiki.services;
 
 
+import com.dionext.configuration.CacheConfiguration;
 import com.dionext.hiki.components.GeoPageInfo;
+import com.dionext.site.dto.PageUrl;
 import com.dionext.site.services.PageCreatorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Primary
@@ -23,7 +29,7 @@ public class HikingLandPageCreatorService extends PageCreatorService {
     @Override
     public String createBodyBottomInformation() {
         return """
-                <small class="d-block mb-3 text-muted">&copy; 2018-2024</small>""" +
+                <small class="d-block mb-3 text-muted">&copy; 2018-2024 v 1.2</small>""" +
                 createImage("images/wikidata.png", 60, 16, "Powered by the magic of Wikidata", "https://www.wikidata.org", true);
     }
 
@@ -54,6 +60,17 @@ public class HikingLandPageCreatorService extends PageCreatorService {
                     "/>""");
         }
         return str.toString();
-
     }
+    public boolean getRu() {
+        return "ru".equals(pageInfo.getLocaleLang());
+    }
+
+    @Override
+    public String createBodyTopMenuLangSelector() {
+        if (getRu()) {
+            return super.createBodyTopMenuLangSelector();
+        }
+        else return "";
+    }
+
 }

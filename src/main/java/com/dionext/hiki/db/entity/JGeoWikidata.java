@@ -8,6 +8,8 @@ import java.io.Serializable;
 /**
  * The persistent class for the JGeoWikidatas database table.
  */
+//ALTER TABLE `hiking`.`JGeoWikidatas`
+//ADD COLUMN `OfficialLangs` LONGTEXT NULL DEFAULT NULL AFTER `ChildrenCount`;
 @Entity
 @Table(name = "JGeoWikidatas")
 @NamedQuery(name = "JGeoWikidata.findAll", query = "SELECT j FROM JGeoWikidata j")
@@ -18,84 +20,64 @@ public class JGeoWikidata implements Serializable {
     @Id
     private String JGeoWikidataId;
 
-    @Lob
     @Column(name = "AboveSeaLevel")
     private String aboveSeaLevel;
 
-    @Lob
     @Column(name = "Area")
     private String area;
 
-    @Lob
     @Column(name = "Capital")
     private String capital;
 
-    @Lob
-    @Column(name = "CoatOfArmsImage")
+    @Column(name = "CoatOfArmsImage", columnDefinition="TEXT")
     private String coatOfArmsImage;
 
-    @Lob
-    @Column(name = "CommonsCategory")
+    @Column(name = "CommonsCategory", columnDefinition="TEXT")
     private String commonsCategory;
 
-    @Lob
-    @Column(name = "CommonsGallery")
+    @Column(name = "CommonsGallery", columnDefinition="TEXT")
     private String commonsGallery;
 
-    @Lob
-    @Column(name = "CommonsMapsCategory")
+    @Column(name = "CommonsMapsCategory", columnDefinition="TEXT")
     private String commonsMapsCategory;
 
-    @Lob
-    @Column(name = "Contains")
+    @Column(name = "Contains", columnDefinition="TEXT")
     private String contains;
 
-    @Lob
     @Column(name = "Country")
     private String country;
 
-    @Lob
-    @Column(name = "DescriptionEn")
+    @Column(name = "DescriptionEn", columnDefinition="TEXT")
     private String descriptionEn;
 
-    @Lob
-    @Column(name = "DescriptionNative")
+    @Column(name = "DescriptionNative", columnDefinition="TEXT")
     private String descriptionNative;
 
-    @Lob
-    @Column(name = "DescriptionRu")
+    @Column(name = "DescriptionRu", columnDefinition="TEXT")
     private String descriptionRu;
 
-    @Lob
-    @Column(name = "DetailMapImage")
+    @Column(name = "DetailMapImage", columnDefinition="TEXT")
     private String detailMapImage;
 
-    @Lob
-    @Column(name = "EnwikiLink")
+    @Column(name = "EnwikiLink", columnDefinition="TEXT")
     private String enwikiLink;
 
-    @Lob
-    @Column(name = "EnWikivoyage")
+    @Column(name = "EnWikivoyage", columnDefinition="TEXT")
     private String enWikivoyage;
 
-    @Lob
-    @Column(name = "ExtIds")
+    @Column(name = "ExtIds", columnDefinition="TEXT")
     private String extIds;
 
-    @Lob
-    @Column(name = "FlagImage")
+    @Column(name = "FlagImage", columnDefinition="TEXT")
     private String flagImage;
 
-    @Lob
     @Column(name = "HighestPointPlace")
     private String highestPointPlace;
 
-    @Lob
-    @Column(name = "Image")
+    @Column(name = "Image", columnDefinition="TEXT")
     private String image;
 
-    @Lob
-    @Column(name = "ImageFirstChild")
+    @Column(name = "ImageFirstChild", columnDefinition="TEXT")
     private String imageFirstChild;
 
     @Column(name = "IsAlps")
@@ -107,103 +89,94 @@ public class JGeoWikidata implements Serializable {
     @Column(name = "IsML")
     private byte isML;
 
-    @Lob
     private String JCountryId;
 
-    @Lob
-    @Column(name = "LabelEn")
+    @Column(name = "LabelEn", columnDefinition="TEXT")
     private String labelEn;
 
-    @Lob
-    @Column(name = "LabelNative")
+    @Column(name = "LabelNative", columnDefinition="TEXT")
     private String labelNative;
 
-    @Lob
-    @Column(name = "LabelRu")
+    @Column(name = "LabelRu", columnDefinition="TEXT")
     private String labelRu;
 
-    @Lob
     @Column(name = "Lang")
     private String lang;
 
-    @Lob
+    @Column(name = "OfficialLangs", columnDefinition="TEXT")
+    private String officialLangs;
+
+
     @Column(name = "Latitude")
     private String latitude;
 
     @Column(name = "Level")
     private int level;
 
-    @Lob
-    @Column(name = "LicencePlateCode")
+    @Column(name = "LicencePlateCode", columnDefinition="TEXT")
     private String licencePlateCode;
 
-    @Lob
-    @Column(name = "LocalDialingCode")
+    @Column(name = "LocalDialingCode", columnDefinition="TEXT")
     private String localDialingCode;
 
-    @Lob
-    @Column(name = "LocationMap")
+    @Column(name = "LocationMap", columnDefinition="TEXT")
     private String locationMap;
 
-    @Lob
-    @Column(name = "LocatorMapImage")
+    @Column(name = "LocatorMapImage", columnDefinition="TEXT")
     private String locatorMapImage;
 
-    @Lob
     @Column(name = "Longitude")
     private String longitude;
 
-    @Lob
     @Column(name = "LowestPointPlace")
     private String lowestPointPlace;
 
-    @Lob
-    @Column(name = "Name")
+    @Column(name = "Name", columnDefinition="TEXT")
     private String name;
 
-    @Lob
-    @Column(name = "NativewikiLink")
+    @Column(name = "NativewikiLink", columnDefinition="TEXT")
     private String nativewikiLink;
 
-    @Lob
-    @Column(name = "NativeWikivoyage")
+    @Column(name = "NativeWikivoyage", columnDefinition="TEXT")
     private String nativeWikivoyage;
 
-    @Lob
-    @Column(name = "PageBanner")
+    @Column(name = "PageBanner", columnDefinition="TEXT")
     private String pageBanner;
 
-    @Lob
     @Column(name = "Parent")
     private String parent;
 
-    @Lob
     @Column(name = "Population")
     private String population;
 
-    @Lob
-    @Column(name = "PostalCode")
+    @Column(name = "PostalCode", columnDefinition="TEXT")
     private String postalCode;
 
-    @Lob
-    @Column(name = "RuwikiLink")
+    @Column(name = "RuwikiLink", columnDefinition="TEXT")
     private String ruwikiLink;
 
-    @Lob
-    @Column(name = "RuWikivoyage")
+    @Column(name = "RuWikivoyage", columnDefinition="TEXT")
     private String ruWikivoyage;
 
-    @Lob
-    @Column(name = "SharesBorderWith")
+    @Column(name = "SharesBorderWith", columnDefinition="TEXT")
     private String sharesBorderWith;
 
-    @Lob
-    @Column(name = "TouristOffice")
+    @Column(name = "TouristOffice", columnDefinition="TEXT")
     private String touristOffice;
 
-    @Lob
-    @Column(name = "WebSite")
+    @Column(name = "WebSite", columnDefinition="TEXT")
     private String webSite;
+
+    @Column(name = "ChildrenCount")
+    private int childrenCount;
+
+    public int getChildrenCount() {
+        return childrenCount;
+    }
+
+    public void setChildrenCount(int childrenCount) {
+        this.childrenCount = childrenCount;
+    }
 
     public String getJGeoWikidataId() {
         return this.JGeoWikidataId;
@@ -597,8 +570,15 @@ public class JGeoWikidata implements Serializable {
         this.webSite = webSite;
     }
 
+    public String getOfficialLangs() {
+        return officialLangs;
+    }
 
-    /////////////////////
+    public void setOfficialLangs(String officialLangs) {
+        this.officialLangs = officialLangs;
+    }
+
+/////////////////////
 
     public final String LocalFileName() {
         return getName();

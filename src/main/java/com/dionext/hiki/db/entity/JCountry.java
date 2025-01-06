@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * The persistent class for the JCountries database table.
+ * see also https://www.wikidata.org/wiki/Help:Wikimedia_language_codes/lists/all
  */
 @Entity
 @Table(name = "JCountries")
@@ -18,112 +19,102 @@ public class JCountry implements Serializable {
     @Id
     private String JCountryId;
 
-    @Lob
-    @Column(name = "Capital")
+
+    @Column(name = "Capital", columnDefinition="TEXT")
     private String capital;
 
-    @Lob
-    @Column(name = "Continent")
+
+    @Column(name = "Continent", columnDefinition="TEXT")
     private String continent;
 
-    @Lob
-    @Column(name = "Dial")
+
+    @Column(name = "Dial", columnDefinition="TEXT")
     private String dial;
 
-    @Lob
-    @Column(name = "DS")
+
+    @Column(name = "DS", columnDefinition="TEXT")
     private String ds;
 
-    @Lob
-    @Column(name = "EDGAR")
+
+    @Column(name = "EDGAR", columnDefinition="TEXT")
     private String edgar;
 
-    @Lob
-    @Column(name = "FIFA")
+
+    @Column(name = "FIFA", columnDefinition="TEXT")
     private String fifa;
 
-    @Lob
-    @Column(name = "FIPS")
+
+    @Column(name = "FIPS", columnDefinition="TEXT")
     private String fips;
 
-    @Lob
-    @Column(name = "GAUL")
+
+    @Column(name = "GAUL", columnDefinition="TEXT")
     private String gaul;
 
-    @Lob
-    @Column(name = "Geoname_ID")
+
+    @Column(name = "Geoname_ID", columnDefinition="TEXT")
     private String geoname_ID;
 
-    @Lob
-    @Column(name = "Image")
+
+    @Column(name = "Image", columnDefinition="TEXT")
     private String image;
 
-    @Lob
-    @Column(name = "IOC")
+
+    @Column(name = "IOC", columnDefinition="TEXT")
     private String ioc;
 
-    @Lob
-    @Column(name = "Is_independent")
+
+    @Column(name = "Is_independent", columnDefinition="TEXT")
     private String is_independent;
 
-    @Lob
+
     private String ISO3166_1_Alpha_2;
 
-    @Lob
+
     private String ISO3166_1_Alpha_3;
 
-    @Lob
     private String ISO4217_currency_alphabetic_code;
 
-    @Lob
+
     private String ISO4217_currency_country_name;
 
-    @Lob
+
     private String ISO4217_currency_minor_unit;
 
-    @Lob
+
     private String ISO4217_currency_name;
 
-    @Lob
+
     private String ISO4217_currency_numeric_code;
 
-    @Lob
+
     @Column(name = "ITU")
     private String itu;
 
-    @Lob
     @Column(name = "Languages")
     private String languages;
 
-    @Lob
     @Column(name = "M49")
     private String m49;
 
-    @Lob
     @Column(name = "MARC")
     private String marc;
 
-    @Lob
     @Column(name = "Name")
     private String name;
 
-    @Lob
     @Column(name = "Official_name_en")
     private String official_name_en;
 
-    @Lob
     @Column(name = "Official_name_fr")
     private String official_name_fr;
 
-    @Lob
     @Column(name = "TLD")
     private String tld;
 
-    @Lob
     @Column(name = "WikidataId")
     private String wikidataId;
 
-    @Lob
     @Column(name = "WMO")
     private String wmo;
 

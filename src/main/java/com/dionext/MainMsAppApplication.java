@@ -27,6 +27,8 @@ public class MainMsAppApplication implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        String s = ":d::d:d:";
+        String[] ss = s.split(":");
         log.debug("Application running");
     }
 

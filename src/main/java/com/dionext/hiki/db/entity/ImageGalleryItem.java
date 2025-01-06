@@ -18,20 +18,19 @@ public class ImageGalleryItem implements Serializable {
     @Column(name = "ImageGalleryItemId")
     private int imageGalleryItemId;
 
-    @Lob
-    @Column(name = "Caption")
+    @Column(name = "Caption", columnDefinition="TEXT")
     private String caption;
 
-    @Lob
-    @Column(name = "FullSizePath")
+
+    @Column(name = "FullSizePath", columnDefinition="TEXT")
     private String fullSizePath;
 
-    @Lob
-    @Column(name = "Title")
+
+    @Column(name = "Title", columnDefinition="TEXT")
     private String title;
 
-    @Lob
-    @Column(name = "TumbPath")
+
+    @Column(name = "TumbPath", columnDefinition="TEXT")
     private String tumbPath;
 
 
