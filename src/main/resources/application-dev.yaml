@@ -5,5 +5,10 @@ logging:
     com:
       dionext: debug
 
-
+web-config:
+  siteStaticStoragePath: "file:/mnt/disk2/sites/hiking/input"
+  siteStoragePaths:
+    - "file:/mnt/disk2/sites/hiking/input"
+  siteInternalStoragePaths:
+    - "file:/mnt/disk2/sites/hiking/mediainfo"
 

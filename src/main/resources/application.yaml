@@ -19,6 +19,9 @@ server:
   shutdown:
     graceful # see also spring.lifecycle.timeout-per-shutdown-phase=1m
 spring:
+  ai:
+    openai:
+      api-key: "UNIT_TEST_KEY"
   main:
     allow-bean-definition-overriding: true
     banner-mode: "off"
