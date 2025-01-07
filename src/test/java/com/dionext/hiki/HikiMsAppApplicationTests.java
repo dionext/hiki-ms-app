@@ -28,7 +28,7 @@ class HikiMsAppApplicationTests {
     @Test
     void testServer() throws Exception {
 
-        mockMvc.perform(get("/hiking/en/index.htm"))
+        mockMvc.perform(get("/en/index.htm"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("The world of hiking")));

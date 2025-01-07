@@ -21,7 +21,7 @@ import java.net.URI;
 @RestController
 @Slf4j
 @Tag(name = "HikingLand Site Controller", description = "HikingLand Site Controller")
-@RequestMapping(value = {"/hiking/en", "/hiking/ru"})
+@RequestMapping(value = {"/en", "/ru"})
 public class HikingLandSiteController extends BaseSiteController {
     ImageGalleryCreatorService imageGalleryCreatorService;
     MediaGalleryCreatorService mediaGalleryCreatorService;

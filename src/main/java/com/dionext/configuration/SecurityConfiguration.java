@@ -11,7 +11,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfiguration {
-    final static private String prefix = "/hiking";
+    final static private String prefix = "";
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

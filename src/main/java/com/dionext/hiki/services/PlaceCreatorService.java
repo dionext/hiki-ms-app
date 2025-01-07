@@ -40,7 +40,7 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
     JGeoWikidataRepository jGeoWikidataRepository;
     JCountryRepository jCountryRepository;
     JWikiPropertyCache jWikiPropertyCache;
-    @Value("${web-config.multiSites.hiking.places.useExternalUrlForImages}")
+    @Value("${web-config.website.places.useExternalUrlForImages}")
     private boolean useExternalUrlForImages;
 
     public static boolean isAppropriateImage(String image) {

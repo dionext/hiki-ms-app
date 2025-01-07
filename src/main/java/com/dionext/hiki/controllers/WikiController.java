@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @Tag(name = "Wiki Controller", description = "Wiki Controller")
-@RequestMapping(value = {"/hiking/api"})
+@RequestMapping(value = {"/api"})
 public class WikiController extends BaseSiteController {
 
     private WikiService wikiService;

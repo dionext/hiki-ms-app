@@ -19,7 +19,7 @@ public class JWikiPropertyCache {
 
     ResourceService resourceService;
     Map<String, JWikiProperty> map = new HashMap<>();
-    @Value("${web-config.multiSites.hiking.siteStaticStoragePath}")
+    @Value("${web-config.website.siteStaticStoragePath}")
     private String siteStoragePath;
 
     @Autowired
