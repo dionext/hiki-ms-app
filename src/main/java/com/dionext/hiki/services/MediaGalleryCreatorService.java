@@ -27,7 +27,7 @@ public class MediaGalleryCreatorService extends HikingLandPageCreatorService {
     public static final String TM_DB_FOLDER = "tmdb";
     public static final String TM_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
     JMediaRepository jMediaRepository;
-    @Value("${web-config.multiSites.hiking.mediaGallery.useExternalUrlForImages}")
+    @Value("${web-config.website.mediaGallery.useExternalUrlForImages}")
     private boolean useExternalUrlForImages;
 
     @Autowired

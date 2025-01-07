@@ -26,7 +26,7 @@ import java.util.Set;
 @RestController
 @Slf4j
 @Tag(name = "Admin Controller", description = "Admin Controller")
-@RequestMapping(value = {"/hiking/admin"})
+@RequestMapping(value = {"/admin"})
 public class AdminController extends BaseSiteController {
 
     private AdminService adminService;

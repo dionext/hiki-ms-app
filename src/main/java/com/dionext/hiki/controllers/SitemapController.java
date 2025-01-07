@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @Tag(name = "Sitemap Controller", description = "Sitemap Controller")
-@RequestMapping(value = {"/hiking"})
+@RequestMapping(value = {"/"})
 public class SitemapController extends BaseSiteController {
 
     HikingLandSitemapService hikingLandSitemapService;
@@ -54,9 +54,9 @@ public class SitemapController extends BaseSiteController {
      * @param params
      * @return
      */
-    @GetMapping("/**")
-    public ResponseEntity<String> all(@RequestParam Map<String,String> params) {
-        return sendOk("");
-    }
+   // @GetMapping("/**")
+   // public ResponseEntity<String> all(@RequestParam Map<String,String> params) {
+    //    return sendOk("");
+    //}
 
 }
