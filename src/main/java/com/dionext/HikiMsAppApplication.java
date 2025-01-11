@@ -17,11 +17,11 @@ import java.util.Locale;
 @ComponentScan(basePackages = "com.dionext.site")
 @Slf4j
 @EnableCaching
-public class MainMsAppApplication implements ApplicationRunner {
+public class HikiMsAppApplication implements ApplicationRunner {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ENGLISH);
-        SpringApplication.run(MainMsAppApplication.class, args);
+        SpringApplication.run(HikiMsAppApplication.class, args);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> log.debug("ShutdownHook...")));
     }
 
