@@ -402,7 +402,7 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
 
         if (!aiRequests.isEmpty()) {
             //str.append("<p><i><b>Hiking:</b></i></p>");
-            int i = 1;
+
             for (AiRequest aiRequest : aiRequests) {
                 //str.append("<hr/>");
                 //createAIInfoBlock(str, aiRequest, i);
@@ -424,7 +424,6 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
                 tempVar.setHeight(-1);
                 tempVar.setTitle("AI generated content: end");
                 str.append(createImage(tempVar));
-                i++;
             }
         }
         //}

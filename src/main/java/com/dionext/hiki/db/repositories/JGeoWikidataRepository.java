@@ -3,8 +3,6 @@ package com.dionext.hiki.db.repositories;
 import com.dionext.configuration.CacheConfiguration;
 import com.dionext.hiki.db.entity.JGeoWikidata;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -9,7 +9,7 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,13 +23,7 @@ public class HikiWebConfiguration {
 
     @Bean
     public WebClient wikiRestWebClient() {
-        final var tcpClient = TcpClient
-                .create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, TIMEOUT)
-                .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
-                });
+
 
         return WebClient.builder()
                 .baseUrl(WIKI_REST_API_BASE_URL)
@@ -39,19 +33,16 @@ public class HikiWebConfiguration {
                                 .defaultCodecs()
                                 .maxInMemorySize(2048 * 1024))
                         .build())
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.create()
+                        .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, TIMEOUT)
+                        .doOnConnected(connection -> {
+                            connection.addHandlerLast(new ReadTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
+                            connection.addHandlerLast(new WriteTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
+                        })))
                 .build();
     }
     @Bean
     public WebClient wikiApiWebClient() {
-        final var tcpClient = TcpClient
-                .create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, TIMEOUT)
-                .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
-                });
-
         return WebClient.builder()
                 .baseUrl(WIKI_API_BASE_URL)
                 .exchangeStrategies(ExchangeStrategies
@@ -60,7 +51,12 @@ public class HikiWebConfiguration {
                                 .defaultCodecs()
                                 .maxInMemorySize(2048 * 1024))
                         .build())
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.create()
+                        .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, TIMEOUT)
+                        .doOnConnected(connection -> {
+                            connection.addHandlerLast(new ReadTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
+                            connection.addHandlerLast(new WriteTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
+                        })))
                 .build();
     }
 }

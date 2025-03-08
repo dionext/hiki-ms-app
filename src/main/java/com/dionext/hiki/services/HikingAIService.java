@@ -167,7 +167,7 @@ public class HikingAIService {
                 return items;
 
         });
-        jobBatchRunner.setJobBatchIdExtractor((jobInstance, item) -> ((JGeoWikidata) item).getJGeoWikidataId());
+        jobBatchRunner.setJobBatchIdExtractor((_, item) -> ((JGeoWikidata) item).getJGeoWikidataId());
     }
 
 

@@ -2,14 +2,12 @@ package com.dionext.hiki.services;
 
 import com.dionext.configuration.CacheConfiguration;
 import com.dionext.site.dto.PageUrl;
-import com.dionext.site.dto.PageUrlAlt;
 import com.dionext.site.services.SitemapService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 

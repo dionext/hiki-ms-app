@@ -2,8 +2,6 @@ package com.dionext.hiki.controllers;
 
 
 import com.dionext.hiki.db.entity.JGeoWikidata;
-import com.dionext.hiki.db.repositories.JGeoWikidataRepository;
-import com.dionext.hiki.services.HikingAIService;
 import com.dionext.hiki.services.WikiService;
 import com.dionext.site.controllers.BaseSiteController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,11 +26,6 @@ public class WikiController extends BaseSiteController {
     public void setWikiService(WikiService wikiService) {
         this.wikiService = wikiService;
     }
-
-    @Autowired
-    private HikingAIService aiService;
-    @Autowired
-    private JGeoWikidataRepository jGeoWikidataRepository;
 
     @GetMapping("load-wiki")
     public ResponseEntity<JGeoWikidata> load(@RequestParam(value = "id", defaultValue = "Q40") String id) {
