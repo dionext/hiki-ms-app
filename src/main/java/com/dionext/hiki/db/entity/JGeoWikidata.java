@@ -15,6 +15,11 @@ import java.io.Serializable;
 @NamedQuery(name = "JGeoWikidata.findAll", query = "SELECT j FROM JGeoWikidata j")
 @SuppressWarnings({"java:S116", "java:S117", "java:S100", "java:S3776"})
 public class JGeoWikidata implements Serializable {
+
+    public static final String PLACE = "place";
+    public static final String PLACE_INFO = "place-info";
+    public static final String HIKI = "hiki";
+
     private static final long serialVersionUID = 1L;
 
     @Id

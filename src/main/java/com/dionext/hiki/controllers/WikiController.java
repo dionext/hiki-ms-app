@@ -1,11 +1,9 @@
 package com.dionext.hiki.controllers;
 
 
-//import com.dionext.hiki.model.wiki.Item;
 import com.dionext.hiki.db.entity.JGeoWikidata;
-import com.dionext.hiki.db.entity.ai.Tour;
 import com.dionext.hiki.db.repositories.JGeoWikidataRepository;
-import com.dionext.hiki.services.AIService;
+import com.dionext.hiki.services.HikingAIService;
 import com.dionext.hiki.services.WikiService;
 import com.dionext.site.controllers.BaseSiteController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @Slf4j
@@ -34,7 +30,7 @@ public class WikiController extends BaseSiteController {
     }
 
     @Autowired
-    private AIService aiService;
+    private HikingAIService aiService;
     @Autowired
     private JGeoWikidataRepository jGeoWikidataRepository;
 
@@ -52,10 +48,12 @@ public class WikiController extends BaseSiteController {
     }
 
     //ai
+    /*
     @GetMapping("list-of-tours")
     public ResponseEntity<List<Tour>> loadListOfTours(@RequestParam(value = "id", defaultValue = "Q40") String id) {
         JGeoWikidata jGeoWikidata = jGeoWikidataRepository.findById(id).orElse(null);
         return new ResponseEntity<List<Tour>>(aiService.listOfTours(jGeoWikidata, Long.valueOf(1), null), HttpStatus.OK);
     }
+     */
 
 }

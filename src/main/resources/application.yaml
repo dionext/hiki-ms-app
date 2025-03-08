@@ -22,6 +22,15 @@ spring:
   ai:
     openai:
       api-key: "UNIT_TEST_KEY"
+    retry:
+      max-attempts: 10  #Maximum number of retry attempts. 10
+      backoff:
+        initial-interval: 2  #Initial sleep duration for the exponential backoff policy. 2 sec
+        multiplier: 5 #  Backoff interval multiplier.
+        max-interval: 3 #  Maximum backoff duration. 3 min.
+      on-client-errors: false #  If false, throw a NonTransientAiException, and do not attempt retry for 4xx client error codes  false
+      exclude-on-http-codes: # List of HTTP status codes that should not trigger a retry (e.g. to throw NonTransientAiException). empty
+      on-http-codes: #List of HTTP status codes that should trigger a retry (e.g. to throw TransientAiException). empty
   main:
     allow-bean-definition-overriding: true
     banner-mode: "off"
@@ -34,6 +43,9 @@ spring:
     user:
       name: ${ADMIN_USER:admin}
       password: ${ADMIN_PASSWORD:admin}
+  codec:
+    max-in-memory-size: 1024KB
+
 #database
   datasource:
     url: jdbc:mariadb://${DATABASE_ADDRESS}?useSSL=false&allowMultiQueries=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
@@ -60,7 +72,11 @@ logging:
     com:
       zaxxer:
         hikari: OFF # suppress errors in log when DatabaseStartupValidator trying to connect to database
-
+    org:
+      springframework:
+        retry:
+          support:
+            RetryTemplate: TRACE
 #----------------------------------------
 web-config:
   website:

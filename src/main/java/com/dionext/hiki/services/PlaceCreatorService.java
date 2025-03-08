@@ -1,5 +1,8 @@
 package com.dionext.hiki.services;
 
+import com.dionext.ai.entity.AiRequest;
+import com.dionext.ai.repositories.AiRequestRepository;
+import com.dionext.utils.CmMarkdownUtils;
 import com.dionext.hiki.db.cache.JWikiPropertyCache;
 import com.dionext.hiki.db.entity.JGeoWikidata;
 import com.dionext.hiki.db.entity.JWikiProperty;
@@ -22,7 +25,6 @@ import org.springframework.stereotype.Service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
-import java.text.MessageFormat;
 import java.util.*;
 
 @Slf4j
@@ -65,6 +67,10 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
     public void setjWikiPropertyCache(JWikiPropertyCache jWikiPropertyCache) {
         this.jWikiPropertyCache = jWikiPropertyCache;
     }
+
+    @Autowired
+    AiRequestRepository aiRequestRepository;
+
 
     public String createPlacesPage(SrcPageContent srcPageContent) {
         String src = srcPageContent.getBody();
@@ -390,10 +396,46 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
             }
 
         }
+        //if (singlePage) {
+        Collection<AiRequest> aiRequests = aiRequestRepository.findByExternalDomainAndExternalEntityAndExternalVariantAndExternalId(
+                JGeoWikidata.HIKI, JGeoWikidata.PLACE, JGeoWikidata.PLACE_INFO, item.getJGeoWikidataId());
+
+        if (!aiRequests.isEmpty()) {
+            //str.append("<p><i><b>Hiking:</b></i></p>");
+            int i = 1;
+            for (AiRequest aiRequest : aiRequests) {
+                //str.append("<hr/>");
+                //createAIInfoBlock(str, aiRequest, i);
+                ImageDrawInfo tempVar = new ImageDrawInfo();
+                tempVar.setImagePath("images/ai_left_16.png");
+                tempVar.setWidth(-1);
+                tempVar.setHeight(-1);
+                tempVar.setTitle("AI generated content: start");
+                //tempVar.setHref(HtmlUtils.urlEncodePath("xxxx"));
+                tempVar.setBlank(false);
+                //tempVar.setNoindex(isNoindexItem(countryItem));
+                str.append(createImage(tempVar));
+                str.append("<i>"
+                        + CmMarkdownUtils.markdownToHtml(aiRequest.getResult())
+                        //+ aiRequest.getResult().replace("\n", "<br/>") +
+                        + "</i>");
+                tempVar.setImagePath("images/ai_right_16.png");
+                tempVar.setWidth(-1);
+                tempVar.setHeight(-1);
+                tempVar.setTitle("AI generated content: end");
+                str.append(createImage(tempVar));
+                i++;
+            }
+        }
+        //}
+
         str.append("""
                 <ul class="list-unstyled">"""); // mt-3 mb-4 geo1
 
         str.append(generateBlockAttributeLine(null, item.getDescription(getRu()))); //Ru ? "Описание" : "Description"
+
+
+
         if (item.getCountry() != null) {
 
             JGeoWikidata countryItem = jGeoWikidataRepository.findById(item.getCountry()).orElse(null);

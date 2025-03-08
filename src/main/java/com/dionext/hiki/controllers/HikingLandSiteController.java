@@ -2,6 +2,7 @@ package com.dionext.hiki.controllers;
 
 import com.dionext.hiki.services.*;
 import com.dionext.site.controllers.BaseSiteController;
+import com.dionext.site.services.PageParserService;
 import com.dionext.utils.HtmlUtils;
 import com.dionext.utils.exceptions.DioRuntimeException;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,9 +29,9 @@ public class HikingLandSiteController extends BaseSiteController {
     PlaceCreatorService placeCreatorService;
     HikingLandPageCreatorService hikingLandPageElementService;
 
-    private HikingLandPageParserService hikingLandPageParserService;
+    private PageParserService hikingLandPageParserService;
     @Autowired
-    public void setHikingLandPageParserService(HikingLandPageParserService hikingLandPageParserService) {
+    public void setHikingLandPageParserService(PageParserService hikingLandPageParserService) {
         this.hikingLandPageParserService = hikingLandPageParserService;
     }
 

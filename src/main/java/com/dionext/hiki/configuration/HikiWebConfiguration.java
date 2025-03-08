@@ -14,7 +14,7 @@ import reactor.netty.tcp.TcpClient;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-public class WebConfiguration {
+public class HikiWebConfiguration {
     private static final String WIKI_REST_API_BASE_URL = "https://www.wikidata.org/w/rest.php/wikibase/v1/";
 
     private static final String WIKI_API_BASE_URL = "https://www.wikidata.org/w/api.php";
