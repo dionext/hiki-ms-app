@@ -11,7 +11,7 @@ import java.io.Serializable;
 //ALTER TABLE `hiking`.`JGeoWikidatas`
 //ADD COLUMN `OfficialLangs` LONGTEXT NULL DEFAULT NULL AFTER `ChildrenCount`;
 @Entity
-@Table(name = "JGeoWikidatas")
+@Table(name = "jgeowikidatas")
 @NamedQuery(name = "JGeoWikidata.findAll", query = "SELECT j FROM JGeoWikidata j")
 @SuppressWarnings({"java:S116", "java:S117", "java:S100", "java:S3776"})
 public class JGeoWikidata implements Serializable {

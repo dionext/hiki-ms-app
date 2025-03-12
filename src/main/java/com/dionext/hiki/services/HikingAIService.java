@@ -7,10 +7,15 @@ import com.dionext.ai.repositories.AiPromptRepository;
 import com.dionext.ai.services.AIRequestService;
 import com.dionext.ai.utils.DbLoggerAdvisor;
 import com.dionext.hiki.db.entity.JGeoWikidata;
+import com.dionext.hiki.db.entity.JGeoWikidataInfo;
 import com.dionext.hiki.db.entity.ai.Tour;
+import com.dionext.hiki.db.repositories.JGeoWikidataInfoRepository;
 import com.dionext.hiki.db.repositories.JGeoWikidataRepository;
+import com.dionext.hiki.utils.AIPlaceInfoMarkdownRenderer;
 import com.dionext.job.*;
 import com.dionext.job.entity.JobInstance;
+import com.dionext.utils.CmMarkdownUtils;
+import com.google.common.base.Strings;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -38,9 +43,12 @@ public class HikingAIService {
     private AiPromptRepository aiPromptRepository;
     @Autowired
     private JGeoWikidataRepository jGeoWikidataRepository;
+    @Autowired
+    private JGeoWikidataInfoRepository jGeoWikidataInfoRepository;
 
     @PostConstruct
     void postConstruct() {
+        /*
         List<AiPrompt> aiPrompts = aiPromptRepository.findAll();
         if (aiPrompts.size() == 0) {
             //1
@@ -60,6 +68,8 @@ public class HikingAIService {
             aiPromptRepository.save(aiPrompt);
 
         }
+
+         */
     }
 
 
@@ -72,24 +82,39 @@ public class HikingAIService {
         if ("listOfTours".equals(jobTypeId) || "placeInfo".equals(jobTypeId)) {
             str.append(
                     JobView.createRunJobParameter("countType", "Тип количества позиций",
-                            jobInstance != null ? jobInstance.getParameter("countType") : CountType.ONE.name(),
+                            jobInstance != null ? jobInstance.getParameter("countType") : CountType.ALL.name(),
                             readOnly));
             str.append(
-                    JobView.createRunJobParameter("isTop", "Только топовые",
-                            jobInstance != null ? jobInstance.getParameter("isTop") : "true",
+                    JobView.createRunJobParameter("topId", "Корневой идентификатор",
+                            jobInstance != null ? jobInstance.getParameter("topId") : "",
+                            readOnly));
+            str.append(
+                    JobView.createRunJobParameter("isCAlp", "Только входящие в зону Альп и их предки",
+                            jobInstance != null ? jobInstance.getParameter("isCAlp") : "false",
                             readOnly));
             str.append(
                     JobView.createRunJobParameter("aiModelId", "Id model",
-                            jobInstance != null ? jobInstance.getParameter("aiModelId") : "2",
+                            jobInstance != null ? jobInstance.getParameter("aiModelId") : "4",
                             readOnly));
             str.append(
                     JobView.createRunJobParameter("isOverrideRequest", "Перезаписывать ранее сохраненные запросы",
-                            jobInstance != null ? jobInstance.getParameter("isOverrideRequest") : "true",
+                            jobInstance != null ? jobInstance.getParameter("isOverrideRequest") : "false",
                             readOnly));
             str.append(
                     JobView.createRunJobParameter("aiPromptId", "Id Prompt",
                             jobInstance != null ? jobInstance.getParameter("aiPromptId") : "1",
                             readOnly));
+        }
+        else if ("placeInfoCopy".equals(jobTypeId)) {
+            str.append(
+                    JobView.createRunJobParameter("countType", "Тип количества позиций",
+                            jobInstance != null ? jobInstance.getParameter("countType") : CountType.ALL.name(),
+                            readOnly));
+            str.append(
+                    JobView.createRunJobParameter("isOverrideRequest", "Перезаписывать ранее сохраненные запросы",
+                            jobInstance != null ? jobInstance.getParameter("isOverrideRequest") : "false",
+                            readOnly));
+
         }
 
         return str.toString();
@@ -97,8 +122,9 @@ public class HikingAIService {
 
     public JobBatchRunner createJob(String jobTypeId, JobInstance _jobInstance) {
         JobBatchRunner jobBatchRunner = new BaseJobBatchRunner();
-        setupJobBatchRunnerForPlaceProcessing(jobBatchRunner);
         if ("listOfTours".equals(jobTypeId) || "placeInfo".equals(jobTypeId)) {
+            setupJobBatchRunnerForPlaceProcessing(jobBatchRunner);
+
             jobBatchRunner.setJobBatchItemProcessor((jobInstance, item) -> {
                 Long aiModelId = Long.valueOf(jobInstance.getParameter("aiModelId"));
                 Long aiPromptId = Long.valueOf(jobInstance.getParameter("aiPromptId"));
@@ -112,6 +138,39 @@ public class HikingAIService {
                             aiRequest.orElse(new AiRequest()));
                     if ("placeInfo".equals(jobTypeId)) placeInfo(place, aiLogInfo);
                     else if ("listOfTours".equals(jobTypeId)) listOfTours(place, aiLogInfo);
+                }
+            });
+        }
+        else if ("placeInfoCopy".equals(jobTypeId)) {
+            jobBatchRunner.setJobBatchListMaker((jobInstance) -> {
+                CountType countType = CountType.valueOf(jobInstance.getParameter("countType"));
+                Collection<AiRequest> items = aiRequestService
+                        .findByExternalDomainAndExternalEntityAndExternalVariant(
+                                JGeoWikidata.HIKI, JGeoWikidata.PLACE, JGeoWikidata.PLACE_INFO);
+
+                if (countType == CountType.ONE)
+                    return items.stream().limit(1).collect(Collectors.toList());
+                else if (countType == CountType.TEN)
+                    return items.stream().limit(10).collect(Collectors.toList());
+                else //if (countType == CountType.ALL)
+                    return items;
+
+            });
+            jobBatchRunner.setJobBatchIdExtractor((_, item) -> ((AiRequest) item).getExternalId());
+
+            jobBatchRunner.setJobBatchItemProcessor((jobInstance, item) -> {
+                boolean isOverrideRequest = Boolean.parseBoolean(jobInstance.getParameter("isOverrideRequest"));
+                AiRequest aiRequest = (AiRequest) item;
+                JGeoWikidataInfo jGeoWikidataInfo = jGeoWikidataInfoRepository.findById(aiRequest.getExternalId()).orElse(null);
+                if (jGeoWikidataInfo == null) {
+                    jGeoWikidataInfo = new JGeoWikidataInfo();
+                    jGeoWikidataInfo.setJGeoWikidataId(aiRequest.getExternalId());
+                    jGeoWikidataInfo.setInfoEn(CmMarkdownUtils.markdownToHtml(aiRequest.getResult(), AIPlaceInfoMarkdownRenderer.class));
+
+                    jGeoWikidataInfoRepository.save(jGeoWikidataInfo);
+                } else if (isOverrideRequest) {
+                    jGeoWikidataInfo.setInfoEn(CmMarkdownUtils.markdownToHtml(aiRequest.getResult(), AIPlaceInfoMarkdownRenderer.class));
+                    jGeoWikidataInfoRepository.save(jGeoWikidataInfo);
                 }
             });
         }
@@ -153,12 +212,24 @@ public class HikingAIService {
     private void setupJobBatchRunnerForPlaceProcessing(JobBatchRunner jobBatchRunner) {
         jobBatchRunner.setJobBatchListMaker((jobInstance) -> {
             CountType countType = CountType.valueOf(jobInstance.getParameter("countType"));
-            boolean isTop = Boolean.parseBoolean(jobInstance.getParameter("isTop"));
-            Collection<JGeoWikidata> items;
-            if (isTop)
-                items = findAllChildRecursive("Q183"); //jGeoWikidataRepository.findByParent("Q40");//todo
+            boolean isCAlp = Boolean.parseBoolean(jobInstance.getParameter("isCAlp"));
+            String topId = jobInstance.getParameter("topId");
+
+            Collection<JGeoWikidata> allitems;
+            if (!Strings.isNullOrEmpty(topId)) {
+                allitems = findAllChildRecursive(topId);
+            }
             else
-                items = jGeoWikidataRepository.findAll();
+                allitems = jGeoWikidataRepository.findAll();
+
+            Collection<JGeoWikidata> items = new ArrayList<>();
+            for(var item : allitems){
+                if (!isCAlp || item.getIsCAlps() == 1){
+                    items.add(item);
+                }
+            }
+
+
             if (countType == CountType.ONE)
                 return items.stream().limit(1).collect(Collectors.toList());
             else if (countType == CountType.TEN)

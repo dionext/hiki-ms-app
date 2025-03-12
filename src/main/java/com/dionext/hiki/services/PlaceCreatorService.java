@@ -2,6 +2,9 @@ package com.dionext.hiki.services;
 
 import com.dionext.ai.entity.AiRequest;
 import com.dionext.ai.repositories.AiRequestRepository;
+import com.dionext.hiki.db.entity.JGeoWikidataInfo;
+import com.dionext.hiki.db.repositories.JGeoWikidataInfoRepository;
+import com.dionext.hiki.utils.AIPlaceInfoMarkdownRenderer;
 import com.dionext.utils.CmMarkdownUtils;
 import com.dionext.hiki.db.cache.JWikiPropertyCache;
 import com.dionext.hiki.db.entity.JGeoWikidata;
@@ -52,6 +55,9 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
         String imageLw = image.toLowerCase();
         return !imageLw.contains("satellite") && !imageLw.contains("topographic");
     }
+
+    @Autowired
+    private JGeoWikidataInfoRepository jGeoWikidataInfoRepository;
 
     @Autowired
     public void setjGeoWikidataRepository(JGeoWikidataRepository jGeoWikidataRepository) {
@@ -283,6 +289,11 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
                     + item.GetLabel(getRu()));
         }
         StringBuilder str = new StringBuilder();
+
+        if (!pageInfo.isSearchEngine() && singlePage){
+            str.append(createAICautionModalDialog());
+        }
+
         if (singlePage) {
             //ищем банер не менее 1280 (по факту в хранилище загружен максимальный)
             str.append(getImageStringForWikimedia(item.getPageBanner(), IMAGES_P_FOLDER + "/" + item.getJCountryId() + "/page_banners", 1280, null, null, false));
@@ -396,45 +407,16 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
             }
 
         }
-        //if (singlePage) {
-        Collection<AiRequest> aiRequests = aiRequestRepository.findByExternalDomainAndExternalEntityAndExternalVariantAndExternalId(
-                JGeoWikidata.HIKI, JGeoWikidata.PLACE, JGeoWikidata.PLACE_INFO, item.getJGeoWikidataId());
-
-        if (!aiRequests.isEmpty()) {
-            //str.append("<p><i><b>Hiking:</b></i></p>");
-
-            for (AiRequest aiRequest : aiRequests) {
-                //str.append("<hr/>");
-                //createAIInfoBlock(str, aiRequest, i);
-                ImageDrawInfo tempVar = new ImageDrawInfo();
-                tempVar.setImagePath("images/ai_left_16.png");
-                tempVar.setWidth(-1);
-                tempVar.setHeight(-1);
-                tempVar.setTitle("AI generated content: start");
-                //tempVar.setHref(HtmlUtils.urlEncodePath("xxxx"));
-                tempVar.setBlank(false);
-                //tempVar.setNoindex(isNoindexItem(countryItem));
-                str.append(createImage(tempVar));
-                str.append("<i>"
-                        + CmMarkdownUtils.markdownToHtml(aiRequest.getResult())
-                        //+ aiRequest.getResult().replace("\n", "<br/>") +
-                        + "</i>");
-                tempVar.setImagePath("images/ai_right_16.png");
-                tempVar.setWidth(-1);
-                tempVar.setHeight(-1);
-                tempVar.setTitle("AI generated content: end");
-                str.append(createImage(tempVar));
-            }
-        }
-        //}
 
         str.append("""
                 <ul class="list-unstyled">"""); // mt-3 mb-4 geo1
-
         str.append(generateBlockAttributeLine(null, item.getDescription(getRu()))); //Ru ? "Описание" : "Description"
+        str.append("</ul>");
 
+        makeAIInfoBlock(item, item.GetLabel(getRu()), singlePage, str);
 
-
+        str.append("""
+                <ul class="list-unstyled">"""); // mt-3 mb-4 geo1
         if (item.getCountry() != null) {
 
             JGeoWikidata countryItem = jGeoWikidataRepository.findById(item.getCountry()).orElse(null);
@@ -593,6 +575,52 @@ public class PlaceCreatorService extends HikingLandPageCreatorService {
         }
         return str.toString();
     }
+
+    private void makeAIInfoBlock(JGeoWikidata item, String placeTitle, boolean singlePage, StringBuilder str) {
+        boolean fromAiRequest = false;
+        String aiText = null;
+        if (fromAiRequest) {
+            Collection<AiRequest> aiRequests = aiRequestRepository.findByExternalDomainAndExternalEntityAndExternalVariantAndExternalId(
+                    JGeoWikidata.HIKI, JGeoWikidata.PLACE, JGeoWikidata.PLACE_INFO, item.getJGeoWikidataId());
+
+            if (!aiRequests.isEmpty()) {
+                for (AiRequest aiRequest : aiRequests) {
+                    aiText = CmMarkdownUtils.markdownToHtml(aiRequest.getResult(), AIPlaceInfoMarkdownRenderer.class);
+                    break;
+                }
+            }
+
+        } else {
+            JGeoWikidataInfo jGeoWikidataInfo = jGeoWikidataInfoRepository.findById(item.getJGeoWikidataId()).orElse(null);
+            if (jGeoWikidataInfo != null) {
+                aiText = jGeoWikidataInfo.getInfoEn();
+            }
+        }
+        if (aiText != null) {
+            if(!singlePage){
+                int firstPClose = aiText.indexOf("</p>");
+                if (firstPClose > -1) aiText = aiText.substring(0, firstPClose) + "...</p>";
+            }
+
+            str.append("""
+                    <div class="container bg-light" >
+                    """);
+
+            str.append("<p><b>");
+            str.append(createAICautionImage());
+            str.append(" ");
+            if (this.getRu()) str.append(i18n.getString("places.hiking.in", Locale.ENGLISH));
+            else str.append(i18n.getString("places.hiking.in"));
+            str.append(" ");
+            str.append(placeTitle);
+            str.append("</b></p>");
+            str.append(aiText);
+            str.append("""
+                    </div>
+                    """);
+        }
+    }
+
     private boolean isNoindexItem (JGeoWikidata item) {
         if (item.getChildrenCount() == 0) return true;
         else return false;

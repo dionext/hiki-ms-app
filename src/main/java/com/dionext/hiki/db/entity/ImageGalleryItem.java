@@ -9,7 +9,7 @@ import java.io.Serializable;
  * The persistent class for the ImageGalleryItems database table.
  */
 @Entity
-@Table(name = "ImageGalleryItems")
+@Table(name = "imagegalleryitems")
 @NamedQuery(name = "ImageGalleryItem.findAll", query = "SELECT i FROM ImageGalleryItem i")
 public class ImageGalleryItem implements Serializable {
     private static final long serialVersionUID = 1L;

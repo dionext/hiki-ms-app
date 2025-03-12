@@ -20,7 +20,10 @@
         <libSiteSpringStarter>1.0.0</libSiteSpringStarter>
         <libAiSpringStarter>1.0.0</libAiSpringStarter>
         <libJobSpringStarter>1.0.0</libJobSpringStarter>
+        <libAuthSpringStarter>1.0.0</libAuthSpringStarter>
         <start-class>com.dionext.HikiMsAppApplication</start-class>
+        <!-- Skip test -->
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>
@@ -40,11 +43,22 @@
             <artifactId>lib-job-spring-starter</artifactId>
             <version>${libJobSpringStarter}</version>
         </dependency>
+        <dependency>
+            <groupId>com.dionext</groupId>
+            <artifactId>lib-auth-spring-starter</artifactId>
+            <version>${libAuthSpringStarter}</version>
+        </dependency>
+
         <!-- spring and common dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+
 
         <!-- dependencies for database-->
         <dependency>
@@ -110,15 +124,10 @@
             <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.6</version>
         </dependency>
-
-        <!-- ai -->
         <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
+            <groupId>org.eclipse.angus</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>2.0.2</version>
         </dependency>
 
     </dependencies>

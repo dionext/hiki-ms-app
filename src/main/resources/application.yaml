@@ -19,6 +19,27 @@ server:
   shutdown:
     graceful # see also spring.lifecycle.timeout-per-shutdown-phase=1m
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   ai:
     openai:
       api-key: "UNIT_TEST_KEY"
@@ -39,10 +60,6 @@ spring:
     timeout-per-shutdown-phase: "30s"
   thymeleaf:
     check-template-location: false # to prevent warning
-  security:
-    user:
-      name: ${ADMIN_USER:admin}
-      password: ${ADMIN_PASSWORD:admin}
   codec:
     max-in-memory-size: 1024KB
 
@@ -108,6 +125,7 @@ web-config:
     siteTitle:
       key: "site.title"
     googleTagID: "G-L7K0706J99"
+    showSignIn: false
     nav:
       - item:
         key: "menu.home"
@@ -175,5 +193,17 @@ web-config:
           - item:
             key: "menu.links"
             url: "links.htm"
+      - item:
+        key: "menu.admin"
+        url: "#"
+        roles:
+          - "ADMIN"
+        subitems:
+          - item:
+            key: "menu.admin.main"
+            url: "/admin/main"
+          - item:
+            key: "menu.admin.job.index"
+            url: "/admin/job/index"
 
 

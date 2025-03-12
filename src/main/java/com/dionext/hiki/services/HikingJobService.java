@@ -18,6 +18,7 @@ public class HikingJobService extends BaseJobService implements JobService {
     void postConstruct() {
         jobManager.addJobType("placeInfo", "Place information");
         jobManager.addJobType("listOfTours", "List of tours");
+        jobManager.addJobType("placeInfoCopy", "Copy place info from aiRequests to JWikidataInfo");
     }
 
     public String createRunJobParameters(String jobTypeId, JobInstance jobInstance, boolean readOnly) {

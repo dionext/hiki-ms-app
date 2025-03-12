@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @SuppressWarnings({"java:S1604"})
 public class CacheConfiguration extends  BaseCacheConfiguration {
     static final public String CACHE_PLACES = "cache-places";
+    static final public String CACHE_PLACES_INFO = "cache-places-info";
 
     ///////////////////////////////////////
     ////// ConcurrentMapCacheManager //////
@@ -46,6 +47,11 @@ public class CacheConfiguration extends  BaseCacheConfiguration {
                         //.maximumWeight(Integer.MAX_VALUE)  - !Note: this is not size in bytes
                         .build());
         caffeineCacheManager.registerCustomCache(CACHE_PLACES,
+                Caffeine.newBuilder()
+                        .recordStats()
+                        .maximumSize(50000)//maximum number of entries the cache may contain
+                        .build());
+        caffeineCacheManager.registerCustomCache(CACHE_PLACES_INFO,
                 Caffeine.newBuilder()
                         .recordStats()
                         .maximumSize(50000)//maximum number of entries the cache may contain

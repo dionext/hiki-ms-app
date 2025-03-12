@@ -9,7 +9,7 @@ import java.io.Serializable;
  * The persistent class for the JWikiProperties database table.
  */
 @Entity
-@Table(name = "JWikiProperties")
+@Table(name = "jwikiproperties")
 @NamedQuery(name = "JWikiProperty.findAll", query = "SELECT j FROM JWikiProperty j")
 @SuppressWarnings({"java:S116", "java:S117", "java:S100", "java:S3776"})
 public class JWikiProperty implements Serializable {

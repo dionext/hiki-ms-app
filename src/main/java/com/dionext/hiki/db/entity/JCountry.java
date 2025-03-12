@@ -10,7 +10,7 @@ import java.io.Serializable;
  * see also https://www.wikidata.org/wiki/Help:Wikimedia_language_codes/lists/all
  */
 @Entity
-@Table(name = "JCountries")
+@Table(name = "jcountries")
 @NamedQuery(name = "JCountry.findAll", query = "SELECT j FROM JCountry j")
 @SuppressWarnings({"java:S116", "java:S117", "java:S100"})
 public class JCountry implements Serializable {

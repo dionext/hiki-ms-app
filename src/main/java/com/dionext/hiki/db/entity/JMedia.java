@@ -11,7 +11,7 @@ import java.util.Date;
  * The persistent class for the JMedias database table.
  */
 @Entity
-@Table(name = "JMedias")
+@Table(name = "jmedias")
 @NamedQuery(name = "JMedia.findAll", query = "SELECT j FROM JMedia j")
 @SuppressWarnings({"java:S116", "java:S117", "java:S100", "java:S3776"})
 public class JMedia implements Serializable {

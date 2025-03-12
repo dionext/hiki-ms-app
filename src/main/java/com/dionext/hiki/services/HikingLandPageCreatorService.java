@@ -2,6 +2,7 @@ package com.dionext.hiki.services;
 
 
 import com.dionext.hiki.components.GeoPageInfo;
+import com.dionext.libauthspringstarter.com.dionext.security.services.AuthPageCreatorService;
 import com.dionext.site.services.PageCreatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary
 @SuppressWarnings({"java:S5663", "java:S1192"})
-public class HikingLandPageCreatorService extends PageCreatorService {
+public class HikingLandPageCreatorService extends AuthPageCreatorService {
 
 
     protected GeoPageInfo geoPageInfo;
@@ -59,6 +60,7 @@ public class HikingLandPageCreatorService extends PageCreatorService {
         return "ru".equals(pageInfo.getLocaleLang());
     }
 
+    /*
     @Override
     public String createBodyTopMenuLangSelector() {
         if (getRu()) {
@@ -66,5 +68,6 @@ public class HikingLandPageCreatorService extends PageCreatorService {
         }
         else return "";
     }
+    */
 
 }
