@@ -20,71 +20,71 @@ public class JMedia implements Serializable {
     @Id
     private Integer JMediaId;
 
-    @Column(name = "BackdropPath", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String backdropPath;
 
-    @Column(name = "Budget")
+    @Column()
     private BigInteger budget;
 
-    @Column(name = "CastEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String castEn;
 
-    @Column(name = "CastRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String castRu;
 
-    @Column(name = "DescriptionEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String descriptionEn;
 
-    @Column(name = "DescriptionRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String descriptionRu;
 
-    @Column(name = "DirectorEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String directorEn;
 
-    @Column(name = "DirectorRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String directorRu;
 
-    @Column(name = "GenresEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String genresEn;
 
-    @Column(name = "GenresRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String genresRu;
 
-    @Column(name = "ImdbId")
+    @Column()
     private String imdbId;
 
-    @Column(name = "LabelEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String labelEn;
 
-    @Column(name = "LabelRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String labelRu;
 
-    @Column(name = "OverviewEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String overviewEn;
 
-    @Column(name = "OverviewRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String overviewRu;
 
-    @Column(name = "PosterPath", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String posterPath;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "ReleaseDate")
+    @Column()
     private Date releaseDate;
 
-    @Column(name = "Runtime")
+    @Column()
     private Integer runtime;
 
-    @Column(name = "SafeName", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String safeName;
 
-    @Column(name = "SortOrder")
+    @Column()
     private Integer sortOrder;
 
-    @Column(name = "TaglineEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String taglineEn;
 
-    @Column(name = "TaglineRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String taglineRu;
 
     private String TMDbId;

@@ -15,22 +15,22 @@ public class ImageGalleryItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ImageGalleryItemId")
+    @Column()
     private int imageGalleryItemId;
 
-    @Column(name = "Caption", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String caption;
 
 
-    @Column(name = "FullSizePath", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String fullSizePath;
 
 
-    @Column(name = "Title", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String title;
 
 
-    @Column(name = "TumbPath", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String tumbPath;
 
 

@@ -48,7 +48,6 @@ public class HikingAIService {
 
     @PostConstruct
     void postConstruct() {
-        /*
         List<AiPrompt> aiPrompts = aiPromptRepository.findAll();
         if (aiPrompts.size() == 0) {
             //1
@@ -69,7 +68,6 @@ public class HikingAIService {
 
         }
 
-         */
     }
 
 

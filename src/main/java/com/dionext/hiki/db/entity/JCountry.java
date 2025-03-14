@@ -20,51 +20,51 @@ public class JCountry implements Serializable {
     private String JCountryId;
 
 
-    @Column(name = "Capital", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String capital;
 
 
-    @Column(name = "Continent", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String continent;
 
 
-    @Column(name = "Dial", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String dial;
 
 
-    @Column(name = "DS", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String ds;
 
 
-    @Column(name = "EDGAR", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String edgar;
 
 
-    @Column(name = "FIFA", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String fifa;
 
 
-    @Column(name = "FIPS", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String fips;
 
 
-    @Column(name = "GAUL", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String gaul;
 
 
-    @Column(name = "Geoname_ID", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String geoname_ID;
 
 
-    @Column(name = "Image", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String image;
 
 
-    @Column(name = "IOC", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String ioc;
 
 
-    @Column(name = "Is_independent", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String is_independent;
 
 
@@ -88,34 +88,34 @@ public class JCountry implements Serializable {
     private String ISO4217_currency_numeric_code;
 
 
-    @Column(name = "ITU")
+    @Column()
     private String itu;
 
-    @Column(name = "Languages")
+    @Column()
     private String languages;
 
-    @Column(name = "M49")
+    @Column()
     private String m49;
 
-    @Column(name = "MARC")
+    @Column()
     private String marc;
 
-    @Column(name = "Name")
+    @Column()
     private String name;
 
-    @Column(name = "Official_name_en")
+    @Column()
     private String official_name_en;
 
-    @Column(name = "Official_name_fr")
+    @Column()
     private String official_name_fr;
 
-    @Column(name = "TLD")
+    @Column()
     private String tld;
 
-    @Column(name = "WikidataId")
+    @Column()
     private String wikidataId;
 
-    @Column(name = "WMO")
+    @Column()
     private String wmo;
 
     public String getJCountryId() {

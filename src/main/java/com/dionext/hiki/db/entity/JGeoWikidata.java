@@ -25,154 +25,154 @@ public class JGeoWikidata implements Serializable {
     @Id
     private String JGeoWikidataId;
 
-    @Column(name = "AboveSeaLevel")
+    @Column()
     private String aboveSeaLevel;
 
-    @Column(name = "Area")
+    @Column()
     private String area;
 
-    @Column(name = "Capital")
+    @Column()
     private String capital;
 
-    @Column(name = "CoatOfArmsImage", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String coatOfArmsImage;
 
-    @Column(name = "CommonsCategory", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String commonsCategory;
 
-    @Column(name = "CommonsGallery", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String commonsGallery;
 
-    @Column(name = "CommonsMapsCategory", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String commonsMapsCategory;
 
-    @Column(name = "Contains", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String contains;
 
-    @Column(name = "Country")
+    @Column()
     private String country;
 
-    @Column(name = "DescriptionEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String descriptionEn;
 
-    @Column(name = "DescriptionNative", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String descriptionNative;
 
-    @Column(name = "DescriptionRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String descriptionRu;
 
-    @Column(name = "DetailMapImage", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String detailMapImage;
 
-    @Column(name = "EnwikiLink", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String enwikiLink;
 
-    @Column(name = "EnWikivoyage", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String enWikivoyage;
 
-    @Column(name = "ExtIds", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String extIds;
 
-    @Column(name = "FlagImage", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String flagImage;
 
-    @Column(name = "HighestPointPlace")
+    @Column()
     private String highestPointPlace;
 
-    @Column(name = "Image", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String image;
 
-    @Column(name = "ImageFirstChild", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String imageFirstChild;
 
-    @Column(name = "IsAlps")
+    @Column()
     private byte isAlps;
 
-    @Column(name = "IsCAlps")
+    @Column()
     private byte isCAlps;
 
-    @Column(name = "IsML")
+    @Column()
     private byte isML;
 
     private String JCountryId;
 
-    @Column(name = "LabelEn", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String labelEn;
 
-    @Column(name = "LabelNative", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String labelNative;
 
-    @Column(name = "LabelRu", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String labelRu;
 
-    @Column(name = "Lang")
+    @Column()
     private String lang;
 
-    @Column(name = "OfficialLangs", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String officialLangs;
 
 
-    @Column(name = "Latitude")
+    @Column()
     private String latitude;
 
-    @Column(name = "Level")
+    @Column()
     private int level;
 
-    @Column(name = "LicencePlateCode", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String licencePlateCode;
 
-    @Column(name = "LocalDialingCode", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String localDialingCode;
 
-    @Column(name = "LocationMap", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String locationMap;
 
-    @Column(name = "LocatorMapImage", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String locatorMapImage;
 
-    @Column(name = "Longitude")
+    @Column()
     private String longitude;
 
-    @Column(name = "LowestPointPlace")
+    @Column()
     private String lowestPointPlace;
 
-    @Column(name = "Name", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String name;
 
-    @Column(name = "NativewikiLink", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String nativewikiLink;
 
-    @Column(name = "NativeWikivoyage", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String nativeWikivoyage;
 
-    @Column(name = "PageBanner", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String pageBanner;
 
-    @Column(name = "Parent")
+    @Column()
     private String parent;
 
-    @Column(name = "Population")
+    @Column()
     private String population;
 
-    @Column(name = "PostalCode", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String postalCode;
 
-    @Column(name = "RuwikiLink", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String ruwikiLink;
 
-    @Column(name = "RuWikivoyage", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String ruWikivoyage;
 
-    @Column(name = "SharesBorderWith", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String sharesBorderWith;
 
-    @Column(name = "TouristOffice", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String touristOffice;
 
-    @Column(name = "WebSite", columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String webSite;
 
-    @Column(name = "ChildrenCount")
+    @Column()
     private int childrenCount;
 
     public int getChildrenCount() {
